@@ -1,13 +1,56 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: url("https://funart.pro/uploads/posts/2020-03/1584111135_8-p-foni-dlya-tovarov-24.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  border: 3px solid black;
+  padding: 16px;
+  min-width: 300px;
+  font-size: 24px;
+}
+
+.text {
+  display: flex;
+}
+
+.task-buttons {
+  display: flex;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.true-style {
+  color: red;
+  text-decoration: line-through;
+}
+
+.delete-all {
+  text-align: center;
+  margin-top: 20px;
+  border: 2px solid black;
+  width: 100px;
+  height: 20px;
+  padding: 16px;
+  margin-top: 50px;
 }
