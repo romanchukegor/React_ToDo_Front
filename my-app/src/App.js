@@ -72,6 +72,8 @@ function App() {
               key={element.id}
               deleteTask={deleteTask}
               toggleTask={toggleTask}
+              todos={todos}
+              setTodos={setTodos}
             />
           );
         })}
