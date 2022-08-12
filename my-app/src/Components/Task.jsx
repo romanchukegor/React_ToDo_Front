@@ -16,20 +16,19 @@ const Task = ({ element, deleteTask, toggleTask, todos, setTodos }) => {
 
   const updateTask = (_id) => {
     if (textEdit) {
-      const url = `http://localhost:8000/tasks/${_id}/text`;
+      const url = `http://localhost:8000/tasks/${_id}`;
       axios
         .patch(url, {
           text: textEdit,
         })
         .then((resp) => {
-          const updateTodos = [...todos].map((element) => {
-            debugger;
+          const updatedTodos = [...todos].map((element) => {
             if (element._id === _id) {
               element.text = resp.data.text;
             }
             return element;
           });
-          setTodos(updateTodos);
+          setTodos(updatedTodos);
           setTaskEdit(null);
           setEditText("");
         });

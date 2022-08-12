@@ -51,7 +51,7 @@ function App() {
       })
       .then((resp) => {
         setTodos([
-          ...todos.map((elem) =>
+          todos.map((elem) =>
             elem._id === _id ? { ...elem, isCheck: !elem.isCheck } : { ...elem }
           ),
         ]);
@@ -62,6 +62,7 @@ function App() {
     <div className="App">
       <div className="header">
         <h1>To-Do List</h1>
+
         <TaskForm addTask={addTask} />
       </div>
       <div className="content">
