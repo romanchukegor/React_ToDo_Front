@@ -24,8 +24,7 @@ function App() {
         .then((resp) => {
           debugger;
           setTodos([...todos, resp.data]);
-        })
-        .catch((err) => console.log(err));
+        });
     }
   };
 

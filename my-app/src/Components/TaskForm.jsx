@@ -13,7 +13,7 @@ const TaskForm = ({ addTask }) => {
     addTask(input);
     setInput("");
   };
-  
+
   return (
     <div>
       <form onSubmit={handleSumbit}>
