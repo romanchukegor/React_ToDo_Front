@@ -1,0 +1,21 @@
+.default-task {
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+  .default-text {
+    display: flex;
+    justify-content: center;
+  }
+  .check {
+    margin-right: 20px;
+  }
+}
+
+.true-style {
+  color: red;
+  text-decoration: line-through;
+}
+
+.task-buttons {
+  display: flex;
+}
