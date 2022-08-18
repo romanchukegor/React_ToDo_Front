@@ -18,8 +18,7 @@ const TaskForm = ({ todos, setTodos, url }) => {
     setUserInput(event.currentTarget.value);
   };
 
-  const handleSumbit = (event) => {
-    event.preventDefault();
+  const handleSumbit = () => {
     addTask(userInput);
     setUserInput("");
   };
@@ -28,7 +27,7 @@ const TaskForm = ({ todos, setTodos, url }) => {
     <div>
       <form onSubmit={handleSumbit}>
         <input type="text" value={userInput} onChange={handleChange} />
-        <button>ADD TASK</button>
+        <button type="submit">ADD TASK</button>
       </form>
     </div>
   );

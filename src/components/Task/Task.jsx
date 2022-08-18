@@ -35,7 +35,7 @@ const Task = ({ element, todos, setTodos, url }) => {
     setTodos([...todos.filter((elem) => elem._id !== _id)]);
   };
 
-  const toggleTask = async (_id, isCheck) => {
+  const completeTask = async (_id, isCheck) => {
     let res = await axios.patch(`${url}/tasks/${_id}/is-check`, {
       isCheck: !isCheck,
     });
@@ -59,7 +59,7 @@ const Task = ({ element, todos, setTodos, url }) => {
         />
       ) : (
         <DefaultTask
-          toggleTask={toggleTask}
+        completeTask={completeTask}
           deleteTask={deleteTask}
           setTaskEdit={setTaskEdit}
           element={element}

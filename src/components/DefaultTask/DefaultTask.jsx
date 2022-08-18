@@ -3,14 +3,14 @@ import deleteImg from "../../images/delete.svg";
 import editImg from "../../images/edit.svg";
 import "./DefaultTask.scss";
 
-const DefaultTask = ({ toggleTask, setTaskEdit, deleteTask, element }) => {
+const DefaultTask = ({ completeTask, setTaskEdit, deleteTask, element }) => {
   return (
     <div className="default-task">
       <div className="default-text">
         <div>
           <input
             type="checkbox"
-            onClick={() => toggleTask(element._id, element.isCheck)}
+            onClick={() => completeTask(element._id, element.isCheck)}
             className="check"
             checked={element.isCheck}
           />
