@@ -2,20 +2,20 @@
   display: flex;
   justify-content: space-between;
   min-width: 300px;
-  .default-text {
+  .default-task__text {
     display: flex;
     justify-content: center;
   }
-  .check {
+  .default-task__checkbox {
     margin-right: 20px;
   }
 }
 
-.true-style {
+.default-task__active {
   color: red;
   text-decoration: line-through;
 }
 
-.task-buttons {
+.default-task__task-buttons {
   display: flex;
 }

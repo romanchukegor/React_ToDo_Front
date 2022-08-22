@@ -1,17 +1,14 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
+import { url } from "../../constants";
 import { useState } from "react";
 import DefaultTask from "../DefaultTask/DefaultTask";
 import UpdateTaskButton from "../UpdateTaskButton/UpdateTaskButton";
 import "./Task.scss";
 
-const Task = ({ element, todos, setTodos, url }) => {
+const Task = ({ element, completeTask, deleteTask, todos, setTodos }) => {
   const [taskEdit, setTaskEdit] = useState(null);
   const [textEdit, setEditText] = useState("");
-
-  const cancelEdit = () => {
-    setTaskEdit(null);
-  };
 
   const updateTask = async (_id) => {
     if (textEdit) {
@@ -30,21 +27,8 @@ const Task = ({ element, todos, setTodos, url }) => {
     }
   };
 
-  const deleteTask = async (_id) => {
-    await axios.delete(`${url}/tasks/${_id}`);
-    setTodos([...todos.filter((elem) => elem._id !== _id)]);
-  };
-
-  const completeTask = async (_id, isCheck) => {
-    let res = await axios.patch(`${url}/tasks/${_id}/is-check`, {
-      isCheck: !isCheck,
-    });
-
-    setTodos([
-      ...todos.map((elem) =>
-        elem._id === _id ? { ...elem, isCheck: !elem.isCheck } : { ...elem }
-      ),
-    ]);
+  const cancelEdit = () => {
+    setTaskEdit(null);
   };
 
   return (
@@ -59,7 +43,7 @@ const Task = ({ element, todos, setTodos, url }) => {
         />
       ) : (
         <DefaultTask
-        completeTask={completeTask}
+          completeTask={completeTask}
           deleteTask={deleteTask}
           setTaskEdit={setTaskEdit}
           element={element}

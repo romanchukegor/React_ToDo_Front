@@ -12,7 +12,7 @@ const UpdateTaskButton = ({updateTask, cancelEdit, setEditText, textEdit, elemen
           value={textEdit}
         />
       </div>
-      <div className="update-task-buttons">
+      <div className="update-task__buttons">
         <div onClick={() => updateTask(element._id)}>
           <img src={doneImg} alt="" />
         </div>
