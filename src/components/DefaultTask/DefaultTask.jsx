@@ -2,33 +2,40 @@ import deleteImg from "../../images/delete.svg";
 import editImg from "../../images/edit.svg";
 import "./DefaultTask.scss";
 
-const DefaultTask = ({ completeTask, setTaskEdit, deleteTask, element }) => {
+const DefaultTask = ({
+  completeTask,
+  deleteTask,
+  elementId,
+  elementIsCheck,
+  elementText,
+  setTask,
+}) => {
   return (
     <div className="default-task">
       <div className="default-task__text">
         <div>
           <input
             type="checkbox"
-            onClick={() => completeTask(element._id, element.isCheck)}
+            onClick={() => completeTask(elementId, elementIsCheck)}
             className="default-task__checkbox"
-            checked={element.isCheck}
+            checked={elementIsCheck}
           />
         </div>
         <div
           className={
-            element.isCheck ? "default-task__active" : "default-task__inactive"
+            elementIsCheck ? "default-task__active" : "default-task__inactive"
           }
         >
-          {element.text}
+          {elementText}
         </div>
       </div>
       <div className="default-task__task-buttons">
-        <div onClick={() => setTaskEdit(element._id)}>
+        <button onClick={() => setTask(elementId)}>
           <img src={editImg} alt="" className="default-task__image" />
-        </div>
-        <div onClick={() => deleteTask(element._id)}>
+        </button>
+        <button onClick={() => deleteTask(elementId)}>
           <img src={deleteImg} alt="" className="default-task__image" />
-        </div>
+        </button>
       </div>
     </div>
   );

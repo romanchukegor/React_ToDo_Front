@@ -2,10 +2,12 @@
   display: flex;
   justify-content: space-between;
   min-width: 300px;
+
   .default-task__text {
     display: flex;
     justify-content: center;
   }
+
   .default-task__checkbox {
     margin-right: 20px;
   }
@@ -18,4 +20,8 @@
 
 .default-task__task-buttons {
   display: flex;
+  
+  button {
+    background-color: rgba(0, 0, 0, 0);
+  }
 }

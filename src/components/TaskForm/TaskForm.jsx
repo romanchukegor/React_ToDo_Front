@@ -1,34 +1,33 @@
-import { useState } from "react";
 import "./TaskForm.scss";
-import axios from "axios";
+import { useState } from "react";
 
-const TaskForm = ({ todos, setTodos, url }) => {
-  const [userInput, setUserInput] = useState("");
+const TaskForm = ({addTask}) => {
+const [ textInput, setTextInput ] = useState('');
 
-  const addTask = async (input) => {
-    if (input) {
-      let res = await axios.post(`${url}/tasks`, {
-        text: input,
-      });
-      setTodos([...todos, res.data]);
-    }
-  };
+const addNewTask = () => {
+  if (textInput.trim() === "") {
+    console.log("Error")
+    return;
+  }
+  addTask(textInput)
+  setTextInput("");
+}
 
-  const handleChange = (event) => {
-    setUserInput(event.currentTarget.value);
-  };
+const handleChange = (event) => {
+  setTextInput(event.currentTarget.value);
+};
 
-  const handleSumbit = () => {
-    addTask(userInput);
-    setUserInput("");
-  };
+const handleSumbit = () => {
+  addTask(textInput);
+  
+};
 
   return (
-    <div>
+    <div className="input-form">
       <form onSubmit={handleSumbit}>
-        <input type="text" value={userInput} onChange={handleChange} />
-        <button type="submit">ADD TASK</button>
+        <input type="text" value={textInput} onChange={handleChange} />
       </form>
+      <button type="submit" onClick={addNewTask}>ADD TASK</button>
     </div>
   );
 };

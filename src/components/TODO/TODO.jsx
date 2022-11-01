@@ -2,28 +2,56 @@ import { useEffect } from "react";
 import { useState } from "react";
 import TaskForm from "../TaskForm/TaskForm";
 import DeleteAllButton from "../DeleteAllButton/DeleteAllButton";
-import axios from "axios";
 import Task from "../Task/Task";
 import "./TODO.scss";
+import {
+  getAllTasksReq,
+  addTaskReq,
+  updateTaskReq,
+  deleteTaskReq,
+  deleteAllTasksReq,
+  completeTaskReq,
+} from "../../service/taskService";
 
-const TODO = ({ url }) => {
+const TODO = () => {
   const [todos, setTodos] = useState([]);
+  const [taskEdit, setTaskEdit] = useState(null);
 
   const getAllTasks = async () => {
-    let res = await axios.get(`${url}/tasks`);
+    const res = await getAllTasksReq();
     let { allTasks } = res.data;
     setTodos(allTasks);
   };
 
+  const addTask = async (textInput) => {
+    const res = await addTaskReq(textInput);
+    setTodos([...todos, res.data]);
+  };
+
+  const updateTask = async (_id, text) => {
+    let res = await updateTaskReq(_id, text);
+    const updatedTodos = [...todos].map((element) => {
+      if (element._id === _id) {
+        element.text = res.data.text;
+      }
+      return element;
+    });
+    setTodos(updatedTodos);
+    setTaskEdit(null);
+  };
+
   const deleteTask = async (_id) => {
-    await axios.delete(`${url}/tasks/${_id}`);
+    await deleteTaskReq(_id);
     setTodos([...todos.filter((elem) => elem._id !== _id)]);
   };
 
+  const deleteAllTasks = async () => {
+    await deleteAllTasksReq();
+    setTodos([]);
+  };
+
   const completeTask = async (_id, isCheck) => {
-    await axios.patch(`${url}/tasks/${_id}/is-check`, {
-      isCheck: !isCheck,
-    });
+    await completeTaskReq(_id, isCheck);
 
     setTodos([
       ...todos.map((elem) =>
@@ -32,27 +60,36 @@ const TODO = ({ url }) => {
     ]);
   };
 
+  const cancelEdit = () => {
+    setTaskEdit(null);
+  };
+
+  const setTask = (_id) => {
+    setTaskEdit(_id);
+  };
+
   useEffect(() => {
     getAllTasks();
   }, []);
 
   return (
     <div className="content">
-      <TaskForm setTodos={setTodos} url={url} todos={todos} />
+      <TaskForm addTask={addTask} />
       {todos.map((element) => {
         return (
           <Task
             element={element}
+            cancelEdit={cancelEdit}
+            setTask={setTask}
+            updateTask={updateTask}
+            taskEdit={taskEdit}
             key={element.id}
-            todos={todos}
-            setTodos={setTodos}
-            url={url}
             completeTask={completeTask}
             deleteTask={deleteTask}
           />
         );
       })}
-      <DeleteAllButton setTodos={setTodos} url={url} />
+      <DeleteAllButton deleteAllTasks={deleteAllTasks} />
     </div>
   );
 };
