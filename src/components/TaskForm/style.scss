@@ -1,0 +1,25 @@
+@mixin size() {
+  height: 20px;
+  outline: none;
+  width: 200px;
+}
+
+button {
+  height: 26px;
+  border: 0;
+  background-color: green;
+  color: white;
+}
+
+.input-form__input__error {
+  border-color: red;
+  @include size();
+}
+
+.input-form__input {
+  @include size();
+}
+
+.input-form {
+  display: flex;
+}

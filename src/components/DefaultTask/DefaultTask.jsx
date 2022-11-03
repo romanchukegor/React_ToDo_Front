@@ -1,39 +1,51 @@
+import { useState } from "react";
 import deleteImg from "../../images/delete.svg";
 import editImg from "../../images/edit.svg";
-import "./DefaultTask.scss";
+import "./style.scss";
 
 const DefaultTask = ({
   completeTask,
   deleteTask,
-  elementId,
-  elementIsCheck,
-  elementText,
-  setTask,
+  element,
+  changeTask,
 }) => {
+
+  const [isCheck, setIsCheck] = useState(false)
+
+  const handleChange = () => {
+    setIsCheck(!isCheck)
+  }
+
+  const handleSubmit = () => {
+      completeTask(element._id, isCheck)
+  }
   return (
     <div className="default-task">
       <div className="default-task__text">
         <div>
+          <form>
           <input
             type="checkbox"
-            onClick={() => completeTask(elementId, elementIsCheck)}
+            onClick={handleSubmit}
             className="default-task__checkbox"
-            checked={elementIsCheck}
+            checked={element.isCheck}
+            onChange = {handleChange}
           />
+          </form>
         </div>
         <div
           className={
-            elementIsCheck ? "default-task__active" : "default-task__inactive"
+            element.isCheck ? "default-task__active" : "default-task__inactive"
           }
         >
-          {elementText}
+          {element.text}
         </div>
       </div>
       <div className="default-task__task-buttons">
-        <button onClick={() => setTask(elementId)}>
+        <button onClick={() => changeTask(element._id)}>
           <img src={editImg} alt="" className="default-task__image" />
         </button>
-        <button onClick={() => deleteTask(elementId)}>
+        <button onClick={() => deleteTask(element._id)}>
           <img src={deleteImg} alt="" className="default-task__image" />
         </button>
       </div>

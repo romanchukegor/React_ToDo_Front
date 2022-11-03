@@ -1,0 +1,27 @@
+@mixin edit() {
+  height: 29px;
+  outline: none;
+}
+
+.update-task {
+  min-width: 300px;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .edit-form__input {
+    @include edit();
+  }
+
+  .edit-form__input__error {
+    @include edit();
+    border-color: red;
+  }
+
+  button {
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 5px;
+  }
+}

@@ -1,6 +1,6 @@
-import url from "../../constants";
-import TODO from "../TODO/TODO";
-import "./App.scss";
+import Todo from "components/Todo/Todo";
+import { Routes, Route } from "react-router-dom";
+import "./style.scss";
 
 const App = () => {
   return (
@@ -8,7 +8,9 @@ const App = () => {
       <div className="header">
         <h1>To-Do List</h1>
       </div>
-      <TODO url={url} />
+      <Routes>
+        <Route path="/" element={<Todo/>}/>
+      </Routes>
     </div>
   );
 };
