@@ -4,7 +4,6 @@ import DeleteAllButton from "components/DeleteAllButton/DeleteAllButton";
 import EditTask from "components/EditTask/EditTask";
 import DefaultTask from "components/DefaultTask/DefaultTask";
 import Error from "components/errorComponent/Error";
-import "./style.scss";
 import {
   getAllTasksService,
   addTaskService,
@@ -13,10 +12,11 @@ import {
   deleteAllTasksService,
   completeTaskService,
 } from "../../service/taskService";
+import "./style.scss";
 
-const TODO = () => {
+const Todo = () => {
   const [todos, setTodos] = useState([]);
-  const [taskEdit, setTaskEdit] = useState(null);
+  const [taskEditId, setTaskEditId] = useState(null);
   const [hasError, setHasError] = useState({
     error: false,
     errorText: "",
@@ -28,7 +28,6 @@ const TODO = () => {
       setTodos(res.data.allTasks);
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось получить задачи",
       });
@@ -41,7 +40,6 @@ const TODO = () => {
       setTodos([...todos, res.data]);
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось добавить задачу",
       });
@@ -50,6 +48,7 @@ const TODO = () => {
 
   const updateTask = async (_id, text) => {
     try {
+      debugger;
       const res = await updateTaskService(_id, text);
       const updatedTodos = [...todos].map((element) => {
         if (element._id === res.data._id) {
@@ -58,10 +57,9 @@ const TODO = () => {
         return element;
       });
       setTodos(updatedTodos);
-      setTaskEdit(null);
+      setTaskEditId(null);
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось обновить задачу",
       });
@@ -73,10 +71,11 @@ const TODO = () => {
       const res = await deleteTaskService(_id);
       if (res.data.deletedCount === 1) {
         setTodos([...todos.filter((elem) => elem._id !== _id)]);
+      } else {
+        return;
       }
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось удалить задачу",
       });
@@ -86,12 +85,14 @@ const TODO = () => {
   const deleteAllTasks = async () => {
     try {
       const res = await deleteAllTasksService();
-      if (res.data.deletedCount === 1) {
+      console.log(res);
+      if (res.data.acknowledged) {
         setTodos([]);
+      } else {
+        return;
       }
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось удалить все задачи",
       });
@@ -99,16 +100,18 @@ const TODO = () => {
   };
 
   const completeTask = async (_id, isCheck) => {
+    console.log(isCheck);
     try {
       const res = await completeTaskService(_id, isCheck);
-      setTodos([...todos.map((elem) => elem._id === res.data._id
+      setTodos([
+        ...todos.map((elem) =>
+          elem._id === res.data._id
             ? { ...elem, isCheck: res.data.isCheck }
             : { ...elem }
         ),
       ]);
     } catch (err) {
       setHasError({
-        ...hasError,
         error: true,
         errorText: "Не удалось отметить задачу",
       });
@@ -116,27 +119,11 @@ const TODO = () => {
   };
 
   const cancelEdit = () => {
-    try {
-      setTaskEdit(null);
-    } catch (err) {
-      setHasError({
-        ...hasError,
-        error: true,
-        errorText: "Не удалось отменить редактирование задачи",
-      });
-    }
+    setTaskEditId(null);
   };
 
   const changeTask = (_id) => {
-    try {
-      setTaskEdit(_id);
-    } catch (err) {
-      setHasError({
-        ...hasError,
-        error: true,
-        errorText: "Не удалось изменить задачу",
-      });
-    }
+    setTaskEditId(_id);
   };
 
   useEffect(() => {
@@ -145,36 +132,36 @@ const TODO = () => {
 
   return (
     <div>
-      {!hasError.error && (
-        <div className="content">
-          <TaskForm addTask={addTask} />
-          {todos.map((element) => {
-            return (
-              <div className="task">
-                {taskEdit === element._id ? (
-                  <EditTask
-                    elementId={element._id}
-                    elementText={element.text}
-                    updateTask={updateTask}
-                    cancelEdit={cancelEdit}
-                  />
-                ) : (
-                  <DefaultTask
-                    completeTask={completeTask}
-                    changeTask={changeTask}
-                    deleteTask={deleteTask}
-                    element={element}
-                  />
-                )}
-              </div>
-            );
-          })}
-          <DeleteAllButton deleteAllTasks={deleteAllTasks} />
-        </div>
-      )}
+      <div className="content">
+        <TaskForm addTask={addTask} />
+        {todos.map((element) => {
+          return (
+            <div className="content__task" key={element._id}>
+              {taskEditId === element._id ? (
+                <EditTask
+                  elementId={element._id}
+                  elementText={element.text}
+                  updateTask={updateTask}
+                  cancelEdit={cancelEdit}
+                  key={element._id}
+                />
+              ) : (
+                <DefaultTask
+                  completeTask={completeTask}
+                  changeTask={changeTask}
+                  deleteTask={deleteTask}
+                  element={element}
+                  key={element._id}
+                />
+              )}
+            </div>
+          );
+        })}
+        <DeleteAllButton deleteAllTasks={deleteAllTasks} />
+      </div>
       {hasError.error && <Error errorText={hasError.errorText} />}
     </div>
   );
 };
 
-export default TODO;
+export default Todo;

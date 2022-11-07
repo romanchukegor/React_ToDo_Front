@@ -1,25 +1,28 @@
-@mixin size() {
-  height: 20px;
-  outline: none;
-  width: 200px;
-}
-
-button {
+.add-form__button {
   height: 26px;
   border: 0;
   background-color: green;
   color: white;
 }
 
-.input-form__input__error {
+.add-form__input__error {
   border-color: red;
-  @include size();
+  height: 20px;
+  outline: none;
+  width: 200px;
 }
 
-.input-form__input {
-  @include size();
+.add-form__input {
+  height: 20px;
+  outline: none;
+  width: 200px;
 }
 
-.input-form {
+.add-form {
   display: flex;
+  flex-direction: column;
+}
+
+.add-form__error {
+  color: red;
 }

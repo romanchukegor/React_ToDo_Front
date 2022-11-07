@@ -11,17 +11,16 @@
   .default-task__checkbox {
     margin-right: 20px;
   }
-}
+  .default-task__active {
+    color: red;
+    text-decoration: line-through;
+  }
 
-.default-task__active {
-  color: red;
-  text-decoration: line-through;
-}
+  .default-task__task-buttons {
+    display: flex;
 
-.default-task__task-buttons {
-  display: flex;
-
-  button {
-    background-color: rgba(0, 0, 0, 0);
+    .default-task__button {
+      background-color: rgba(0, 0, 0, 0);
+    }
   }
 }

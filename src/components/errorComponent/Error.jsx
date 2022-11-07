@@ -1,9 +1,11 @@
-const Error = ({errorText}) => {
-    return (
-        <div>
-            <p style={{fontSize: "50px", color: "red"}}>Произошла ошибка... {errorText}</p>
-        </div>
-    )
-}
+import "./style.scss";
 
-export default Error
+const Error = ({ errorText }) => {
+  return (
+    <div>
+      <p className="error-text">Произошла ошибка... {errorText}</p>
+    </div>
+  );
+};
+
+export default Error;

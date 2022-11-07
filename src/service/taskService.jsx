@@ -1,5 +1,5 @@
 import axios from "axios";
-import { url } from "../constants";
+import { url } from "constants";
 
 export const getAllTasksService = () => axios.get(`${url}/tasks`);
 

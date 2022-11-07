@@ -1,32 +1,29 @@
 import { useState } from "react";
+import cancelImg from "images/cancel.svg";
+import doneImg from "images/done.svg";
 import "./style.scss";
-import cancelImg from "../../images/cancel.svg";
-import doneImg from "../../images/done.svg";
 
 const EditTaskButton = ({ elementId, updateTask, cancelEdit, elementText }) => {
   const [textEdit, setTextEdit] = useState(elementText);
   const [textEditError, setTextEditError] = useState("");
 
   const handleChange = (event) => {
-    setTextEdit(event.currentTarget.value);
-    if (event.currentTarget.value === "") {
-      setTextEditError("Поле не может быть пустым");
-    } else {
-      setTextEditError("");
-    }
+    setTextEdit(event.target.value);
   };
 
-  const handleSumbit = () => {
+  const updateEditTask = () => {
     if (textEdit.trim() === "") {
+      setTextEditError("Поле не может быть пустым");
       return;
+    } else {
+      updateTask(elementId, textEdit);
+      setTextEdit("");
     }
-    updateTask(elementId, textEdit);
-    setTextEdit("");
   };
 
   return (
-    <div className="update-task">
-      <form onSubmit={handleSumbit}>
+    <div>
+      <div className="update-task">
         <input
           name="input"
           type="text"
@@ -38,16 +35,16 @@ const EditTaskButton = ({ elementId, updateTask, cancelEdit, elementText }) => {
           }
         />
         <div>
-          <button>
+          <button className="update-task__button" onClick={updateEditTask}>
             <img src={doneImg} alt="" />
           </button>
-          <button onClick={cancelEdit}>
+          <button onClick={cancelEdit} className="update-task__button">
             <img src={cancelImg} alt="" />
           </button>
         </div>
-      </form>
+      </div>
       {textEditError && (
-        <div style={{ color: "red", fontSize: "16px" }}>{textEditError}</div>
+        <div className="update-task__text-error">{textEditError}</div>
       )}
     </div>
   );

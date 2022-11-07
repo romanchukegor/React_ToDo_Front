@@ -1,5 +1,5 @@
-import Todo from "components/Todo/Todo";
 import { Routes, Route } from "react-router-dom";
+import Todo from "components/Todo/Todo";
 import "./style.scss";
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
         <h1>To-Do List</h1>
       </div>
       <Routes>
-        <Route path="/" element={<Todo/>}/>
+        <Route path="/" element={<Todo />} />
       </Routes>
     </div>
   );
