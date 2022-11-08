@@ -3,8 +3,10 @@ import editImg from "images/edit.svg";
 import "./style.scss";
 
 const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
+
   const handleChange = async () => {
-    completeTask(task._id, !task.isCheck);
+    const newIsCheck = !task.isCheck
+    completeTask(task._id, newIsCheck);
   };
 
   return (
