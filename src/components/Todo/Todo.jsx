@@ -22,7 +22,7 @@ const Todo = () => {
     errorText: "",
   });
 
- console.log(todos)
+  console.log(todos);
 
   const getAllTasks = async () => {
     try {
@@ -51,11 +51,11 @@ const Todo = () => {
   const updateTask = async (_id, text) => {
     try {
       const res = await updateTaskService(_id, text);
-      const updatedTodos = [...todos].map((element) => {
-        if (element._id === res.data._id) {
-          element.text = res.data.text;
+      const updatedTodos = [...todos].map((task) => {
+        if (task._id === res.data._id) {
+          task.text = res.data.text;
         }
-        return element;
+        return task;
       });
       setTodos(updatedTodos);
       setTaskEditId(null);
@@ -72,7 +72,7 @@ const Todo = () => {
       const res = await deleteTaskService(_id);
       if (res.data.deletedCount === 1) {
         setTodos([...todos.filter((elem) => elem._id !== _id)]);
-      } 
+      }
     } catch (err) {
       setHasError({
         error: true,
@@ -86,7 +86,7 @@ const Todo = () => {
       const res = await deleteAllTasksService();
       if (res.data.acknowledged) {
         setTodos([]);
-      } 
+      }
     } catch (err) {
       setHasError({
         error: true,
@@ -110,7 +110,7 @@ const Todo = () => {
         error: true,
         errorText: "Не удалось отметить задачу",
       });
-      return err
+      return err;
     }
   };
 
@@ -130,24 +130,24 @@ const Todo = () => {
     <div>
       <div className="tasks">
         <TaskForm addTask={addTask} />
-        {todos.map((element) => {
+        {todos.map((task) => {
           return (
-            <div className="tasks__task" key={element._id}>
-              {taskEditId === element._id ? (
+            <div className="tasks__task" key={task._id}>
+              {taskEditId === task._id ? (
                 <EditTask
-                  elementId={element._id}
-                  elementText={element.text}
+                  taskId={task._id}
+                  taskText={task.text}
                   updateTask={updateTask}
                   cancelEdit={cancelEdit}
-                  key={element._id}
+                  key={task._id}
                 />
               ) : (
                 <DefaultTask
                   completeTask={completeTask}
                   changeTask={changeTask}
                   deleteTask={deleteTask}
-                  element={element}
-                  key={element._id}
+                  task={task}
+                  key={task._id}
                 />
               )}
             </div>

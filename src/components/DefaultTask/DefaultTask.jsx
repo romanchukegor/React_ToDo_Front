@@ -2,10 +2,9 @@ import deleteImg from "images/delete.svg";
 import editImg from "images/edit.svg";
 import "./style.scss";
 
-const DefaultTask = ({ completeTask, deleteTask, element, changeTask }) => {
-  
+const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
   const handleChange = async () => {
-    completeTask(element._id, !element.isCheck);
+    completeTask(task._id, !task.isCheck);
   };
 
   return (
@@ -15,30 +14,30 @@ const DefaultTask = ({ completeTask, deleteTask, element, changeTask }) => {
           <input
             type="checkbox"
             className="default-task__checkbox"
-            checked={element.isCheck}
+            checked={task.isCheck}
             onChange={handleChange}
           />
         </div>
         <div
           className={
-            element.isCheck ? "default-task__active" : "default-task__inactive"
+            task.isCheck ? "default-task__active" : "default-task__inactive"
           }
         >
-          {element.text}
+          {task.text}
         </div>
       </div>
       <div className="default-task__task-buttons">
         <button
           type="button"
           className="default-task__button"
-          onClick={() => changeTask(element._id)}
+          onClick={() => changeTask(task._id)}
         >
           <img src={editImg} alt="" className="default-task__image" />
         </button>
         <button
           type="button"
           className="default-task__button"
-          onClick={() => deleteTask(element._id)}
+          onClick={() => deleteTask(task._id)}
         >
           <img src={deleteImg} alt="" className="default-task__image" />
         </button>

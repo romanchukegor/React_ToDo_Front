@@ -3,8 +3,8 @@ import cancelImg from "images/cancel.svg";
 import doneImg from "images/done.svg";
 import "./style.scss";
 
-const EditTask = ({ elementId, updateTask, cancelEdit, elementText }) => {
-  const [textEdit, setTextEdit] = useState(elementText);
+const EditTask = ({ taskId, updateTask, cancelEdit, taskText }) => {
+  const [textEdit, setTextEdit] = useState(taskText);
   const [textEditError, setTextEditError] = useState("");
 
   const handleChange = (event) => {
@@ -17,7 +17,7 @@ const EditTask = ({ elementId, updateTask, cancelEdit, elementText }) => {
         setTextEditError("Поле не может быть пустым");
         return;
       }
-      updateTask(elementId, textEdit);
+      updateTask(taskId, textEdit);
       setTextEdit("");
     } catch (error) {
       setTextEditError("Ошибка изменения задачи");
