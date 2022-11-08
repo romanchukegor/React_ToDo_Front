@@ -3,7 +3,7 @@ import TaskForm from "components/TaskForm/TaskForm";
 import DeleteAllButton from "components/DeleteAllButton/DeleteAllButton";
 import EditTask from "components/EditTask/EditTask";
 import DefaultTask from "components/DefaultTask/DefaultTask";
-import Error from "components/errorComponent/Error";
+import Error from "components/Error/Error";
 import {
   getAllTasksService,
   addTaskService,
@@ -11,7 +11,7 @@ import {
   deleteTaskService,
   deleteAllTasksService,
   completeTaskService,
-} from "../../service/taskService";
+} from "service/taskService";
 import "./style.scss";
 
 const Todo = () => {
@@ -21,6 +21,8 @@ const Todo = () => {
     error: false,
     errorText: "",
   });
+
+ console.log(todos)
 
   const getAllTasks = async () => {
     try {
@@ -48,7 +50,6 @@ const Todo = () => {
 
   const updateTask = async (_id, text) => {
     try {
-      debugger;
       const res = await updateTaskService(_id, text);
       const updatedTodos = [...todos].map((element) => {
         if (element._id === res.data._id) {
@@ -71,9 +72,7 @@ const Todo = () => {
       const res = await deleteTaskService(_id);
       if (res.data.deletedCount === 1) {
         setTodos([...todos.filter((elem) => elem._id !== _id)]);
-      } else {
-        return;
-      }
+      } 
     } catch (err) {
       setHasError({
         error: true,
@@ -87,9 +86,7 @@ const Todo = () => {
       const res = await deleteAllTasksService();
       if (res.data.acknowledged) {
         setTodos([]);
-      } else {
-        return;
-      }
+      } 
     } catch (err) {
       setHasError({
         error: true,
@@ -113,6 +110,7 @@ const Todo = () => {
         error: true,
         errorText: "Не удалось отметить задачу",
       });
+      return err
     }
   };
 
@@ -130,11 +128,11 @@ const Todo = () => {
 
   return (
     <div>
-      <div className="content">
+      <div className="tasks">
         <TaskForm addTask={addTask} />
         {todos.map((element) => {
           return (
-            <div className="content__task" key={element._id}>
+            <div className="tasks__task" key={element._id}>
               {taskEditId === element._id ? (
                 <EditTask
                   elementId={element._id}

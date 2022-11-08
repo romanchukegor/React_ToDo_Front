@@ -3,7 +3,7 @@ import cancelImg from "images/cancel.svg";
 import doneImg from "images/done.svg";
 import "./style.scss";
 
-const EditTaskButton = ({ elementId, updateTask, cancelEdit, elementText }) => {
+const EditTask = ({ elementId, updateTask, cancelEdit, elementText }) => {
   const [textEdit, setTextEdit] = useState(elementText);
   const [textEditError, setTextEditError] = useState("");
 
@@ -12,12 +12,15 @@ const EditTaskButton = ({ elementId, updateTask, cancelEdit, elementText }) => {
   };
 
   const updateEditTask = () => {
-    if (textEdit.trim() === "") {
-      setTextEditError("Поле не может быть пустым");
-      return;
-    } else {
+    try {
+      if (textEdit.trim() === "") {
+        setTextEditError("Поле не может быть пустым");
+        return;
+      }
       updateTask(elementId, textEdit);
       setTextEdit("");
+    } catch (error) {
+      setTextEditError("Ошибка изменения задачи");
     }
   };
 
@@ -31,23 +34,24 @@ const EditTaskButton = ({ elementId, updateTask, cancelEdit, elementText }) => {
           value={textEdit}
           placeholder="Enter something..."
           className={
-            textEditError ? "edit-form__input__error" : "edit-form__input"
+            textEditError ? "update-task__input__error" : "update-task__input"
           }
         />
-        <div>
-          <button className="update-task__button" onClick={updateEditTask}>
+        <div className="update-task__buttons">
+          <button
+            className="update-task__buttons__button"
+            onClick={updateEditTask}
+          >
             <img src={doneImg} alt="" />
           </button>
-          <button onClick={cancelEdit} className="update-task__button">
+          <button onClick={cancelEdit} className="update-task__buttons__button">
             <img src={cancelImg} alt="" />
           </button>
         </div>
       </div>
-      {textEditError && (
-        <div className="update-task__text-error">{textEditError}</div>
-      )}
+      {textEditError && <div className="text-error">{textEditError}</div>}
     </div>
   );
 };
 
-export default EditTaskButton;
+export default EditTask;

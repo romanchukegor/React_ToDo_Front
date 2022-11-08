@@ -3,26 +3,29 @@
   display: flex;
   justify-content: space-between;
 
-  .edit-form__input {
+  &__input {
     height: 29px;
     outline: none;
-    margin-top: 5px;
   }
 
-  .edit-form__input__error {
+  &__input__error {
     height: 29px;
     outline: none;
     border-color: red;
   }
 
-  .update-task__button {
-    background-color: rgba(0, 0, 0, 0);
-    margin-top: 5px;
-    margin-bottom: 5px;
+  &__buttons {
+    
+    &__button {
+      background-color: rgba(0, 0, 0, 0);
+      border: 0;
+      margin-top: 5px;
+      margin-bottom: 0px;
+    }
   }
 }
 
-.update-task__text-error {
+.text-error {
   font-size: 16px;
   color: red;
 }

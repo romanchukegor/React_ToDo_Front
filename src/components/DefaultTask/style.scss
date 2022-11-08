@@ -3,24 +3,22 @@
   justify-content: space-between;
   min-width: 300px;
 
-  .default-task__text {
+  &__text {
     display: flex;
     justify-content: center;
   }
 
-  .default-task__checkbox {
+  &__checkbox {
     margin-right: 20px;
   }
-  .default-task__active {
+
+  &__active {
     color: red;
     text-decoration: line-through;
   }
 
-  .default-task__task-buttons {
-    display: flex;
-
-    .default-task__button {
-      background-color: rgba(0, 0, 0, 0);
-    }
+  &__button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0
   }
 }

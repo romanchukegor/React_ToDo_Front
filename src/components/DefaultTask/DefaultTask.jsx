@@ -1,14 +1,11 @@
-import { useState } from "react";
 import deleteImg from "images/delete.svg";
 import editImg from "images/edit.svg";
 import "./style.scss";
 
 const DefaultTask = ({ completeTask, deleteTask, element, changeTask }) => {
-  const [isCheck, setIsCheck] = useState(false);
-
-  const handleChange = () => {
-    setIsCheck(!isCheck);
-    completeTask(element._id, isCheck);
+  
+  const handleChange = async () => {
+    completeTask(element._id, !element.isCheck);
   };
 
   return (
@@ -32,12 +29,14 @@ const DefaultTask = ({ completeTask, deleteTask, element, changeTask }) => {
       </div>
       <div className="default-task__task-buttons">
         <button
+          type="button"
           className="default-task__button"
           onClick={() => changeTask(element._id)}
         >
           <img src={editImg} alt="" className="default-task__image" />
         </button>
         <button
+          type="button"
           className="default-task__button"
           onClick={() => deleteTask(element._id)}
         >

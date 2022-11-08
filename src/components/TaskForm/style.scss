@@ -1,28 +1,27 @@
-.add-form__button {
-  height: 26px;
-  border: 0;
-  background-color: green;
-  color: white;
-}
-
-.add-form__input__error {
-  border-color: red;
-  height: 20px;
-  outline: none;
-  width: 200px;
-}
-
-.add-form__input {
-  height: 20px;
-  outline: none;
-  width: 200px;
-}
-
 .add-form {
   display: flex;
   flex-direction: column;
-}
+  &__button {
+    height: 26px;
+    border: 0;
+    background-color: green;
+    color: white;
+  }
 
-.add-form__error {
-  color: red;
+  &__input__error {
+    border-color: red;
+    height: 20px;
+    outline: none;
+    width: 200px;
+  }
+
+  &__input {
+    height: 20px;
+    outline: none;
+    width: 200px;
+  }
+
+  &__error {
+    color: red;
+  }
 }
