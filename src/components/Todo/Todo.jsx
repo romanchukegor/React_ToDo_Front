@@ -85,7 +85,6 @@ const Todo = () => {
   const deleteAllTasks = async () => {
     try {
       const res = await deleteAllTasksService();
-      console.log(res);
       if (res.data.acknowledged) {
         setTodos([]);
       } else {
@@ -100,7 +99,6 @@ const Todo = () => {
   };
 
   const completeTask = async (_id, isCheck) => {
-    console.log(isCheck);
     try {
       const res = await completeTaskService(_id, isCheck);
       setTodos([
