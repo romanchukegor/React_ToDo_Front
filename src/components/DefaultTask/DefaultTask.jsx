@@ -3,6 +3,7 @@ import editImg from "images/edit.svg";
 import "./style.scss";
 
 const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
+  
   const handleChange = () => {
     const newIsCheck = !task.isCheck;
     completeTask(task._id, newIsCheck);
