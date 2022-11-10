@@ -1,33 +1,26 @@
 import { useState } from "react";
+import Error from "components/Error/Error";
 import "./style.scss";
 
 const TaskForm = ({ addTask }) => {
   const [textInput, setTextInput] = useState("");
   const [error, setError] = useState({
     isError: false,
-    textError: "",
+    errorText: "",
   });
 
-  const addNewTask = () => {
-    try {
+  const addNewTask = async() => {
       if (textInput.trim() === "") {
-        setError((error) => ({
-          ...error,
+        setError({
           isError: true,
           textError: "Поле не может быть пустым",
-        }));
+        });
         return;
       }
-      addTask(textInput);
-      setTextInput("");
-      setError((error) => ({ ...error, isError: false }));
-    } catch (error) {
-      setError((error) => ({
-        ...error,
-        isError: true,
-        textError: "Ошибка добавления задачи",
-      }));
-    }
+      const addedTask = await addTask(textInput);
+      if(addedTask) {
+        setTextInput("");
+      }
   };
 
   const handleChange = (event) => {
@@ -47,9 +40,7 @@ const TaskForm = ({ addTask }) => {
       <button className="add-form__button" onClick={addNewTask} type="button">
         ADD TASK
       </button>
-      {error.isError && (
-        <div className="add-form__error">{error.textError}</div>
-      )}
+      {error.isError && <Error errorText={error.errorText} />}
     </div>
   );
 };

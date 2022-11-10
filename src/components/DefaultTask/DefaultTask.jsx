@@ -3,9 +3,8 @@ import editImg from "images/edit.svg";
 import "./style.scss";
 
 const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
-
-  const handleChange = async () => {
-    const newIsCheck = !task.isCheck
+  const handleChange = () => {
+    const newIsCheck = !task.isCheck;
     completeTask(task._id, newIsCheck);
   };
 
@@ -34,14 +33,14 @@ const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
           className="default-task__button"
           onClick={() => changeTask(task._id)}
         >
-          <img src={editImg} alt="" className="default-task__image" />
+          <img src={editImg} alt="" />
         </button>
         <button
           type="button"
           className="default-task__button"
           onClick={() => deleteTask(task._id)}
         >
-          <img src={deleteImg} alt="" className="default-task__image" />
+          <img src={deleteImg} alt="" />
         </button>
       </div>
     </div>

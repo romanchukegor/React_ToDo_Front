@@ -14,14 +14,11 @@
     border-color: red;
   }
 
-  &__buttons {
-    
-    &__button {
-      background-color: rgba(0, 0, 0, 0);
-      border: 0;
-      margin-top: 5px;
-      margin-bottom: 0px;
-    }
+  &__button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    margin-top: 5px;
+    margin-bottom: 0px;
   }
 }
 

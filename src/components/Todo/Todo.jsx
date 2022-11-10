@@ -22,8 +22,6 @@ const Todo = () => {
     errorText: "",
   });
 
-  console.log(todos);
-
   const getAllTasks = async () => {
     try {
       const res = await getAllTasksService();
@@ -40,6 +38,7 @@ const Todo = () => {
     try {
       const res = await addTaskService(textInput);
       setTodos([...todos, res.data]);
+      return res.data
     } catch (err) {
       setHasError({
         error: true,
@@ -59,6 +58,7 @@ const Todo = () => {
       });
       setTodos(updatedTodos);
       setTaskEditId(null);
+      return res.data
     } catch (err) {
       setHasError({
         error: true,
@@ -70,9 +70,15 @@ const Todo = () => {
   const deleteTask = async (_id) => {
     try {
       const res = await deleteTaskService(_id);
-      if (res.data.deletedCount === 1) {
-        setTodos([...todos.filter((elem) => elem._id !== _id)]);
-      }
+      if (res.data.deletedCount !== 1) {
+        setHasError({
+          
+          error: true,
+          errorText: "не удалось верно удалить задачу"
+        })
+        return;
+      }  
+      setTodos([...todos.filter((elem) => elem._id !== _id)]);
     } catch (err) {
       setHasError({
         error: true,
@@ -84,7 +90,7 @@ const Todo = () => {
   const deleteAllTasks = async () => {
     try {
       const res = await deleteAllTasksService();
-      if (res.data.acknowledged) {
+      if (res.data.deletedCount === todos.length) {
         setTodos([]);
       }
     } catch (err) {
@@ -114,14 +120,6 @@ const Todo = () => {
     }
   };
 
-  const cancelEdit = () => {
-    setTaskEditId(null);
-  };
-
-  const changeTask = (_id) => {
-    setTaskEditId(_id);
-  };
-
   useEffect(() => {
     getAllTasks();
   }, []);
@@ -138,13 +136,13 @@ const Todo = () => {
                   taskId={task._id}
                   taskText={task.text}
                   updateTask={updateTask}
-                  cancelEdit={cancelEdit}
+                  cancelEdit={() => setTaskEditId(null)}
                   key={task._id}
                 />
               ) : (
                 <DefaultTask
                   completeTask={completeTask}
-                  changeTask={changeTask}
+                  changeTask={(_id) => setTaskEditId(_id)}
                   deleteTask={deleteTask}
                   task={task}
                   key={task._id}
