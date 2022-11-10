@@ -47,7 +47,8 @@ const EditTask = ({ taskId, updateTask, cancelEdit, taskText }) => {
           <button 
             onClick={cancelEdit} 
             className="update-task__button"
-            type="button">
+            type="button"
+            >
             <img src={cancelImg} alt="" />
           </button>
         </div>

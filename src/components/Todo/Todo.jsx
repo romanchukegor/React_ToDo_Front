@@ -38,7 +38,7 @@ const Todo = () => {
     try {
       const res = await addTaskService(textInput);
       setTodos([...todos, res.data]);
-      return res.data
+      return res.data;
     } catch (err) {
       setHasError({
         error: true,
@@ -58,7 +58,7 @@ const Todo = () => {
       });
       setTodos(updatedTodos);
       setTaskEditId(null);
-      return res.data
+      return res.data;
     } catch (err) {
       setHasError({
         error: true,
@@ -72,7 +72,6 @@ const Todo = () => {
       const res = await deleteTaskService(_id);
       if (res.data.deletedCount !== 1) {
         setHasError({
-          
           error: true,
           errorText: "не удалось верно удалить задачу"
         })

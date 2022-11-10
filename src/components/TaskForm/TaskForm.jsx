@@ -9,18 +9,18 @@ const TaskForm = ({ addTask }) => {
     errorText: "",
   });
 
-  const addNewTask = async() => {
-      if (textInput.trim() === "") {
-        setError({
-          isError: true,
-          textError: "Поле не может быть пустым",
-        });
-        return;
-      }
-      const addedTask = await addTask(textInput);
-      if(addedTask) {
-        setTextInput("");
-      }
+  const addNewTask = async () => {
+    if (textInput.trim() === "") {
+      setError({
+        isError: true,
+        textError: "Поле не может быть пустым",
+      });
+      return;
+    }
+    const addedTask = await addTask(textInput);
+    if (addedTask) {
+      setTextInput("");
+    }
   };
 
   const handleChange = (event) => {
@@ -37,7 +37,11 @@ const TaskForm = ({ addTask }) => {
         onChange={handleChange}
         className={error.isError ? "add-form__input__error" : "add-form__input"}
       />
-      <button className="add-form__button" onClick={addNewTask} type="button">
+      <button 
+      className="add-form__button" 
+      onClick={addNewTask} 
+      type="button"
+      >
         ADD TASK
       </button>
       {error.isError && <Error errorText={error.errorText} />}
