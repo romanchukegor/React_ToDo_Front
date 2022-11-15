@@ -55,10 +55,12 @@ const Todo = () => {
           task.text = res.data.text;
         }
         return task;
+        
       });
       setTodos(updatedTodos);
       setTaskEditId(null);
       return res.data;
+
     } catch (err) {
       setHasError({
         error: true,

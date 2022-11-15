@@ -4,9 +4,8 @@ import "./style.scss";
 
 const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
   
-  const handleChange = () => {
-    const newIsCheck = !task.isCheck;
-    completeTask(task._id, newIsCheck);
+  const handleChange = (event) => {
+    completeTask(task._id, event.target.checked);
   };
 
   return (

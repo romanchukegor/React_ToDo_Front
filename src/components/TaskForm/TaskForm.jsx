@@ -13,7 +13,7 @@ const TaskForm = ({ addTask }) => {
     if (textInput.trim() === "") {
       setError({
         isError: true,
-        textError: "Поле не может быть пустым",
+        errorText: "Поле не может быть пустым",
       });
       return;
     }
