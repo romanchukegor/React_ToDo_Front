@@ -38,7 +38,7 @@ const EditTask = ({ taskId, updateTask, cancelEdit, taskText }) => {
             errorText ? "update-task__input__error" : "update-task__input"
           }
         />
-        <div>
+        <div className="update-task__buttons">
           <button
             className="update-task__button"
             onClick={updateEditTask}
