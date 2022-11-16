@@ -1,0 +1,28 @@
+.update-task {
+  min-width: 300px;
+  display: flex;
+  justify-content: space-between;
+
+  &__input {
+    height: 29px;
+    outline: none;
+  }
+
+  &__input__error {
+    height: 29px;
+    outline: none;
+    border-color: red;
+  }
+
+  &__button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+}
+
+.text-error {
+  font-size: 16px;
+  color: red;
+}

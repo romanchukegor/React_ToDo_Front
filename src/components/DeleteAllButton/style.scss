@@ -1,0 +1,19 @@
+.delete-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 20px;
+  border: 2px solid black;
+  width: 100px;
+  height: 20px;
+  padding: 16px;
+  margin-top: 50px;
+  background: linear-gradient(0deg, #11053b, #1e0b63, #11053b);
+
+  &__button {
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+  }
+}

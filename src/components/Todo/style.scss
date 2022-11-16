@@ -1,0 +1,18 @@
+.tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    border: 3px solid black;
+    padding: 16px;
+    min-width: 300px;
+    height: 25px;
+    font-size: 24px;
+    background: linear-gradient(90deg, #b9deed, #efefef);
+  }
+}

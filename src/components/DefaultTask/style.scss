@@ -1,0 +1,24 @@
+.default-task {
+  display: flex;
+  justify-content: space-between;
+  min-width: 300px;
+
+  &__text {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__checkbox {
+    margin-right: 20px;
+  }
+
+  &__active {
+    color: red;
+    text-decoration: line-through;
+  }
+
+  &__button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0
+  }
+}
