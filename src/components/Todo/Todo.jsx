@@ -25,6 +25,7 @@ const Todo = () => {
   const getAllTasks = async () => {
     try {
       const res = await getAllTasksService();
+      
       setTodos(res.data.allTasks);
     } catch (err) {
       setHasError({
@@ -37,7 +38,9 @@ const Todo = () => {
   const addTask = async (textInput) => {
     try {
       const res = await addTaskService(textInput);
+
       setTodos([...todos, res.data]);
+
       return res.data;
     } catch (err) {
       setHasError({
@@ -50,17 +53,19 @@ const Todo = () => {
   const updateTask = async (_id, text) => {
     try {
       const res = await updateTaskService(_id, text);
+
       const updatedTodos = [...todos].map((task) => {
         if (task._id === res.data._id) {
           task.text = res.data.text;
         }
+
         return task;
-        
       });
+
       setTodos(updatedTodos);
       setTaskEditId(null);
-      return res.data;
 
+      return res.data;
     } catch (err) {
       setHasError({
         error: true,
@@ -72,11 +77,13 @@ const Todo = () => {
   const deleteTask = async (_id) => {
     try {
       const res = await deleteTaskService(_id);
+
       if (res.data.deletedCount !== 1) {
         setHasError({
           error: true,
           errorText: "не удалось верно удалить задачу"
         })
+
         return;
       }  
       setTodos([...todos.filter((elem) => elem._id !== _id)]);
@@ -91,9 +98,11 @@ const Todo = () => {
   const deleteAllTasks = async () => {
     try {
       const res = await deleteAllTasksService();
+
       if (res.data.deletedCount === todos.length) {
         setTodos([]);
       }
+
     } catch (err) {
       setHasError({
         error: true,
@@ -105,6 +114,7 @@ const Todo = () => {
   const completeTask = async (_id, isCheck) => {
     try {
       const res = await completeTaskService(_id, isCheck);
+
       setTodos([
         ...todos.map((elem) =>
           elem._id === res.data._id
@@ -117,6 +127,7 @@ const Todo = () => {
         error: true,
         errorText: "Не удалось отметить задачу",
       });
+      
       return err;
     }
   };
@@ -126,11 +137,10 @@ const Todo = () => {
   }, []);
 
   return (
-    <div>
+    <div className="condition-block">
       <div className="tasks">
         <TaskForm addTask={addTask} />
-        {todos.map((task) => {
-          return (
+        {todos.map((task) => (
             <div className="tasks__task" key={task._id}>
               {taskEditId === task._id ? (
                 <EditTask
@@ -150,8 +160,7 @@ const Todo = () => {
                 />
               )}
             </div>
-          );
-        })}
+        ))}
         <DeleteAllButton deleteAllTasks={deleteAllTasks} />
       </div>
       {hasError.error && <Error errorText={hasError.errorText} />}

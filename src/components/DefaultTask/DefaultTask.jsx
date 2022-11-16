@@ -11,10 +11,9 @@ const DefaultTask = ({ completeTask, deleteTask, task, changeTask }) => {
   return (
     <div className="default-task">
       <div className="default-task__text">
-        <div>
+        <div className="default-task__checkbox">
           <input
             type="checkbox"
-            className="default-task__checkbox"
             checked={task.isCheck}
             onChange={handleChange}
           />

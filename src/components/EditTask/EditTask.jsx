@@ -17,7 +17,9 @@ const EditTask = ({ taskId, updateTask, cancelEdit, taskText }) => {
       setErrorText("Поле не может быть пустым");
       return;
     }
+
     const updatedTask = await updateTask(taskId, textEdit);
+
     if (updatedTask) {
       setTextEdit("");
     } 

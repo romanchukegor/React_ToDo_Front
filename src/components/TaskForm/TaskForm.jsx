@@ -17,7 +17,9 @@ const TaskForm = ({ addTask }) => {
       });
       return;
     }
+
     const addedTask = await addTask(textInput);
+    
     if (addedTask) {
       setTextInput("");
     }
