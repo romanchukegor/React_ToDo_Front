@@ -26,7 +26,7 @@ const EditTask = ({ taskId, updateTask, cancelEdit, taskText }) => {
   } 
 
   return (
-    <div>
+    <div className="condition-update-task">
       <div className="update-task">
         <input
           name="input"
